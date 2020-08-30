@@ -1,0 +1,32 @@
+server:  
+  port: 8200
+  ssl:
+    enabled: true
+    key-store: classpath:paypalkeystore.jks
+    key-store-password: paypalpass
+    key-alias: paypal
+security:
+  require-ssl: false
+
+spring:
+  application:
+    name: paypal
+  datasource:
+     username: root
+     password: root
+     url: jdbc:mysql://localhost:3306/paypal_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+  jpa:
+     properties:
+        hibernate:
+           dialect: org.hibernate.dialect.MySQL5Dialect
+     generate-ddl: true
+     hibernate:
+        ddl-auto: create
+     show-sql: true
+logging:
+  level:
+     org: 
+        hibernate:
+           web: DEBUG
+        springframework:
+           web: DEBUG  
