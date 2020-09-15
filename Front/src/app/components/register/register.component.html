@@ -1,0 +1,42 @@
+<div style="margin-bottom:50px;margin-right: 30%;margin-left: 30%">
+
+  <form [formGroup]="form" >
+
+    <div class="form-group">
+      <label style="margin-top: 20px">Ime:</label>
+      <input name="ime" class="form-control margin" [formControl]="ime">
+      <small class="form-text error" *ngIf="ime.errors?.required && ime.touched" style="color: red">
+        Neophodno je uneti ime!
+      </small>
+
+      <label style="margin-top: 20px">Prezime:</label>
+      <input name="prezime" class="form-control margin" [formControl]="prezime">
+      <small class="form-text error" *ngIf="prezime.errors?.required && prezime.touched" style="color: red">
+        Neophodno je uneti prezime!
+      </small>
+
+      <label style="margin-top: 20px">Email:</label>
+      <input name="email" class="form-control margin" [formControl]="email">
+      <small class="form-text error" *ngIf="email.errors?.required && email.touched" style="color: red">
+        Neophodno je uneti email!
+      </small>
+
+      <label style="margin-top: 20px">Lozinka:</label>
+      <input name="lozinka" type="password" class="form-control margin" [formControl]="lozinka">
+      <small class="form-text error" *ngIf="lozinka.errors?.required && lozinka.touched" style="color: red">
+        Neophodno je uneti lozinku!
+      </small>
+
+
+      <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="confirmClick()"
+              [disabled]="!form.valid">
+        Potvrdi
+      </button>
+
+      <div class="container signin">
+        <p>Vec imate nalog? <a href="/prijava">Uloguj se</a></p>
+      </div>
+    </div>
+  </form>
+</div>
+
