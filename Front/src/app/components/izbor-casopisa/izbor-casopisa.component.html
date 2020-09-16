@@ -1,0 +1,47 @@
+<div class="items-wrapper__item items-wrapper__item-small items-wrapper__item--blue">
+  <igx-navbar style="font-family: 'Lucida Grande'" title="P O C E T N A">
+  </igx-navbar>
+
+  <div style="text-align: center">
+    <p  style="color: black;font-size:60px; font-family: 'Ink Free'; margin-bottom: 10%">Izbor casopisa</p>
+  </div>
+
+  <div style="margin-bottom:50px;margin-right: 30%;margin-left: 30%">
+
+    <form [formGroup]="form">
+      <div class="form-group">
+
+        <label style="font-size: 20px;">Naziv casopisa:</label>
+        <select class="form-control margin" [formControl]="nazivCasopisa"  [(ngModel)]="zapocniPlacanje.casopis" (ngModelChange)="calculate()">
+          <option>Nacionalna geografija</option>
+          <option>Sat</option>
+          <option>Nin</option>
+          <option>Magazin</option>
+          <option>Neven</option>
+        </select>
+        <small class="form-text error" *ngIf="nazivCasopisa.errors?.required && nazivCasopisa.touched" style="color: red">
+          Izbor casopisa je obavezan!
+        </small>
+
+        <label style="margin-top: 20px">Cena:</label>
+        <input name="cena" class="form-control margin" readonly="true" [formControl]="cena" [(ngModel)]="zapocniPlacanje.cena">
+        <small class="form-text error"  *ngIf="cena.errors?.required && cena.touched" style="color: red">
+          Nije moguce menjati cenu casopisa!
+        </small>
+
+        <label style="margin-top: 20px">Nacin placanja:</label>
+        <input name="tipPlacanja" class="form-control margin" readonly="true" [formControl]="tipPlacanja" [(ngModel)]="zapocniPlacanje.tipPlacanja">
+
+        <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="confirmClick()"
+                [disabled]="!form.valid">
+          POTVRDI
+        </button>
+        <button class="btn btn-primary" style="width: 100% ; margin-top: 20px" (click)="exit()">ZATVORI</button>
+      </div>
+    </form>
+  </div>
+
+
+
+
+</div>

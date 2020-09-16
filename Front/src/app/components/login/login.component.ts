@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           if (!success) {
             alert('Neispravan email ili lozinka!');
           } else {
-            this.router.navigate(["/pocetna"])
+            this.router.navigate(["/izborCasopisa"])
 
           }
         }

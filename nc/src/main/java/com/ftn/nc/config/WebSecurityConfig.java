@@ -76,6 +76,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/api/korisnici/registracija").permitAll()
+			.antMatchers("/nc/testPaypal").permitAll()
+			.antMatchers("/nc/test").permitAll()
+			.antMatchers("/api/nc/zapocniPlacanje").permitAll()
 			.anyRequest().authenticated(); //ensures that any HTTP request that comes to the filter will be checked for authentication.
 
 		//making sure that my filter is called before UsernamePasswordAuthenticationFilter

@@ -19,21 +19,19 @@ public class NalogZaPlacanje {
 	
 	@Id
 	@GeneratedValue()
-	private Long id;
+	private long id;
 	
-	private String idPlacanja;
+	private String idPlacanja; // poslato sa paypal-a
+	private String idKupca; // poslato sa paypal-a
 	
 	@ManyToOne
 	private PodaciOProdavcu prodavac;
 	
-	private String idProdavca;
-	private double iznos;
-	private String metoda;
+	private double cena;
 	private String namera;
-	private String opis;
 	
 	//inicijalno status je 'KREIRAN'
 	private StatusNalogaZaPlacanje status = StatusNalogaZaPlacanje.KREIRAN;
-	
+
 
 }

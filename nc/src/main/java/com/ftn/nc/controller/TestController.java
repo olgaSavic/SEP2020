@@ -13,7 +13,6 @@ public class TestController {
 	@Autowired
 	RestTemplate restTemplate;
 		
-	// test KT1 - bitcoin
 	@RequestMapping("/testPaypal")
 	public String testBitcoin() {
 		

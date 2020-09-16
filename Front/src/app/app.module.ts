@@ -36,6 +36,11 @@ import {AuthService} from "./service/auth.service";
 
 import {AuthGuard} from "./guards/AuthGuard";
 import {RandomGuard} from "./guards/RandomGuard";
+import {IzborCasopisaComponent} from './components/izbor-casopisa/izbor-casopisa.component';
+import { SuccessComponent } from './components/success/success.component';
+import { ErrorComponent } from './components/error/error.component';
+import { CancelComponent } from './components/cancel/cancel.component';
+import {PaymentService} from './service/payment.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +51,14 @@ import {RandomGuard} from "./guards/RandomGuard";
     RegisterComponent,
 
     LoginComponent,
+
+    IzborCasopisaComponent,
+
+    SuccessComponent,
+
+    ErrorComponent,
+
+    CancelComponent,
 
 
   ],
@@ -80,6 +93,7 @@ import {RandomGuard} from "./guards/RandomGuard";
   providers: [
     UserService,
     AuthService,
+    PaymentService,
     AuthGuard,
     RandomGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

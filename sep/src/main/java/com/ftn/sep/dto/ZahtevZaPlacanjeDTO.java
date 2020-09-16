@@ -1,4 +1,4 @@
-package com.ftn.sep.model;
+package com.ftn.sep.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ZahtevZaPlacanje {
+public class ZahtevZaPlacanjeDTO {
 	
-	private Long idProdavca;
-	private Double kolicina;
+	private long idProdavca;
+	private double cena;
 	
+
 }
