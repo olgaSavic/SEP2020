@@ -31,6 +31,7 @@ public class SepController {
 		ZahtevZaPlacanjeDTO dto = new ZahtevZaPlacanjeDTO();
 		dto.setCena(request.getCena());
 		dto.setIdProdavca(1);
+		dto.setValuta("USD");
 		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8200/novoPlacanje", dto, String.class);
 		HashMap<String, String> map = new HashMap<>();
         map.put("url", response.getBody());

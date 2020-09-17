@@ -20,5 +20,5 @@ public class NovoPlacanjeRequest {
 	private String tipPlacanja;
 	
 	private String casopis ;
-
+	
 }

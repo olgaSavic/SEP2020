@@ -45,10 +45,11 @@ public class PayPalService {
 		NalogZaPlacanje nalog = new NalogZaPlacanje();
 		nalog.setProdavac(prodavac);
 		nalog.setCena(dto.getCena());
+		nalog.setValuta(dto.getValuta());
 		nalogRepository.save(nalog);
 		
 		Amount amount = new Amount();
-		amount.setCurrency("USD");
+		amount.setCurrency(dto.getValuta());
 		double total = new BigDecimal(dto.getCena()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		amount.setTotal(String.format("%.2f", total));
 
@@ -116,8 +117,5 @@ public class PayPalService {
 		nalogRepository.save(nalog);
 	}
 
-	public Double getCenaNalogaZaPlacanje(String nalogId) {
-		return nalogRepository.findOneByIdPlacanja(nalogId).getCena();
-	}
 
 }

@@ -13,6 +13,7 @@ public class ZahtevZaPlacanjeDTO {
 	
 	private long idProdavca;
 	private double cena;
+	private String valuta ;
 	
 
 }

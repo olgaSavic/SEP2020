@@ -28,7 +28,7 @@ public class NalogZaPlacanje {
 	private Prodavac prodavac;
 	
 	private double cena;
-	//private String namera;
+	private String valuta;
 	
 	//inicijalno status je 'KREIRAN'
 	private StatusNalogaZaPlacanje status = StatusNalogaZaPlacanje.KREIRAN;
