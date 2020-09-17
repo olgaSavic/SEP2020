@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../service/auth.service";
 import {UserService} from "../../service/user.service";
+import {TokenStorageService} from '../../service/token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +19,17 @@ export class LoginComponent implements OnInit {
   public email: AbstractControl;
   public lozinka: AbstractControl;
 
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+
   user : UserModel = new UserModel();
 
   constructor(private authService : AuthService, public fb: FormBuilder,
               private route: ActivatedRoute,
               private http: HttpClient, private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private tokenStorage: TokenStorageService) {
     this.form = this.fb.group({
 
       'email': ['', Validators.compose([Validators.required])],
@@ -42,17 +48,22 @@ export class LoginComponent implements OnInit {
 
       this.user.email = this.email.value;
       this.user.lozinka = this.lozinka.value;
-      this.authService.login(this.user).subscribe(
-        success => {
+      this.authService.login2(this.user).subscribe(
+        data => {
 
-          if (!success) {
-            alert('Neispravan email ili lozinka!');
-          } else {
-            this.router.navigate(["/izborCasopisa"])
+          this.tokenStorage.saveToken(data.accessToken);
+          this.tokenStorage.saveUser(data);
 
-          }
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+
+          this.router.navigateByUrl('/izborCasopisa');
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
         }
-      )
+      );
 
   }
 

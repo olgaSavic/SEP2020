@@ -25,6 +25,10 @@ export class AuthService{
         }));
   }
 
+  login2(user: UserModel): Observable<any> {
+    return this.http.post<any>("http://localhost:8080/api/auth/signin", {email: user.email, lozinka: user.lozinka})
+  }
+
   doLoginUser(response){
     localStorage.setItem("AGENT_JWT_TOKEN", response.jwt);
 
