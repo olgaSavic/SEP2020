@@ -35,8 +35,6 @@ public class SepController {
 		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8200/novoPlacanje", dto, String.class);
 		HashMap<String, String> map = new HashMap<>();
         map.put("url", response.getBody());
-        System.out.println(map.values());
-        System.out.println(response.getBody());
         return map;
 	}
 

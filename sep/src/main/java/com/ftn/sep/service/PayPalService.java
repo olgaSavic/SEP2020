@@ -37,10 +37,11 @@ public class PayPalService {
 	@Autowired
 	private NalogZaPlacanjeRepository nalogRepository;
 	
-	// Novo placanje moze biti ili uspesno izvrseno ili otkazano od strane korisnika
+	// kreira se novo placanje sa svim neophodnim detaljima za placanje
 	public Payment novoPlacanje(ZahtevZaPlacanjeDTO dto) throws PayPalRESTException {
 		
 		Prodavac prodavac = prodavacRepository.findOneById(dto.getIdProdavca());
+		
 		
 		NalogZaPlacanje nalog = new NalogZaPlacanje();
 		nalog.setProdavac(prodavac);
@@ -68,6 +69,7 @@ public class PayPalService {
 		payment.setPayer(payer);  
 		payment.setTransactions(transactions);
 		
+		// neophodno je definisati linkove za cancel i approve operacije
 		String cancelUrl = "";
         String successUrl = "";
         successUrl = "https://localhost:8200/" + URL_USPESNO + "/"+ nalog.getId();
