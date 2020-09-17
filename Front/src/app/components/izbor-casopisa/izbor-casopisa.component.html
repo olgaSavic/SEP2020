@@ -3,7 +3,7 @@
   </igx-navbar>
 
   <div style="text-align: center">
-    <p  style="color: black;font-size:60px; font-family: 'Ink Free'; margin-bottom: 10%">Izbor casopisa</p>
+    <p  style="color: black;font-size:60px; font-family: 'Ink Free'; margin-bottom: 10%">Izbor časopisa</p>
   </div>
 
   <div style="margin-bottom:50px;margin-right: 30%;margin-left: 30%">
@@ -25,9 +25,6 @@
 
         <label style="margin-top: 20px">Cena:</label>
         <input name="cena" class="form-control margin" readonly="true" [formControl]="cena" [(ngModel)]="zapocniPlacanje.cena">
-        <small class="form-text error"  *ngIf="cena.errors?.required && cena.touched" style="color: red">
-          Nije moguce menjati cenu casopisa!
-        </small>
 
         <label style="margin-top: 20px">Nacin placanja:</label>
         <input name="tipPlacanja" class="form-control margin" readonly="true" [formControl]="tipPlacanja" [(ngModel)]="zapocniPlacanje.tipPlacanja">

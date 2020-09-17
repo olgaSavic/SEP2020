@@ -16,9 +16,6 @@ export class AuthService{
   }
 
   login(user : UserModel) : Observable<boolean>{
-
-
-
     return this.http.post<any>("http://localhost:8080/api/auth/signin", {email: user.email, lozinka: user.lozinka})
       .pipe(
         tap(response => this.doLoginUser(response)),

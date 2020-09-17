@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PaymentService} from '../../service/payment.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DOCUMENT} from '@angular/common';
 import {ZapocniPlacanjeModel} from '../../model/zapocniPlacanje.model';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-izbor-casopisa',
@@ -27,11 +29,12 @@ export class IzborCasopisaComponent implements OnInit {
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private paymentService: PaymentService) {
+              private http: HttpClient,
+              private paymentService: PaymentService, @Inject(DOCUMENT) private document: Document) {
 
 
     this.form = this.fb.group({
-      'cena': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,3}$')])],
+      'cena': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,5}$')])],
       'nazivCasopisa': ['', Validators.compose([Validators.required])],
       'tipPlacanja': ['', Validators.compose([Validators.required])]
     })
@@ -65,7 +68,7 @@ export class IzborCasopisaComponent implements OnInit {
       this.zapocniPlacanje.cena = 400;
     }
     else if (this.nazivCasopisa.value == "Neven") {
-      this.zapocniPlacanje.cena = 500;
+      this.zapocniPlacanje.cena = 10000;
     }
 
   }
@@ -75,10 +78,12 @@ export class IzborCasopisaComponent implements OnInit {
     model.cena = this.cena.value ;
     model.tipPlacanja = this.tipPlacanja.value ;
     model.casopis = this.nazivCasopisa.value;
-    this.paymentService.zapocniPlacanje(model).subscribe(data => {
-      //alert("Prelazite na stranicu za paypal!");
-      //this.router.navigateByUrl(data);
+
+    this.paymentService.rutirajNaPaypal(model).subscribe(url => {
+      this.document.location.href = url['url'];
+
     })
+
   }
 
   exit() {

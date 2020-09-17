@@ -25,10 +25,10 @@ public class NalogZaPlacanje {
 	private String idKupca; // poslato sa paypal-a
 	
 	@ManyToOne
-	private PodaciOProdavcu prodavac;
+	private Prodavac prodavac;
 	
 	private double cena;
-	private String namera;
+	//private String namera;
 	
 	//inicijalno status je 'KREIRAN'
 	private StatusNalogaZaPlacanje status = StatusNalogaZaPlacanje.KREIRAN;

@@ -1,0 +1,2 @@
+insert into prodavac (id, paypal_client_id, paypal_secret, email) values 
+ (1, 'AaDVaBi8xEISdChC3g5yREpYE9hbBI8WvEMI4VZLdI-Y_w86qfUqKbw9oIpobGD3VWy8u3Gig1zPZZS1', 'EOHs_WmlqJJC4Yus-hPspbp_7oBsG2DuQQV6xZqGtlEJtZivxYIuuQGvT5ZgejQNY0O1Q1qg-0AZpD-D', 'prodavac@gmail.com');

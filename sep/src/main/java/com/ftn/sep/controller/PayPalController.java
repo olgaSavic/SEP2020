@@ -26,57 +26,54 @@ public class PayPalController {
 	@Autowired
 	private PayPalService paymentService;
 	
-	private static final String SUCCESS_URL = "http://localhost:4200/payment/success";
-	private static final String CANCEL_URL = "http://localhost:4200/payment/cancel";
-	private static final String ERROR_URL = "http://localhost:4200/payment/error";
+	private static final String URL_USPESNO = "http://localhost:4200/placanje/uspesno";
+	private static final String URL_OTKAZANO = "http://localhost:4200/placanje/otkazano";
+	private static final String URL_GRESKA = "http://localhost:4200/placanje/greska";
 	
 	
-	@PostMapping("createPayment")
-	public String createPayment(@RequestBody ZahtevZaPlacanjeDTO pr) {
-				
+	@PostMapping("novoPlacanje")
+	public String novoPlacanje(@RequestBody ZahtevZaPlacanjeDTO pr) {	
 		try {
-			Payment payment = paymentService.kreirajPlacanje(pr);
+			Payment payment = paymentService.novoPlacanje(pr);
 			
 			for(Links link:payment.getLinks()) {
 				System.out.println("LINK: " + link.getRel());
 				System.out.println("LINK: " + link.getHref());
 				if(link.getRel().equals("approval_url")) {	
-					return link.getHref();
+					return link.getHref(); // u slucaju da je uspesno placanje, posalje kupca na sandbox stranicu za placanje
 				}
 			}			
 		} catch (PayPalRESTException e) {
 			e.printStackTrace();
 		}
-		return ERROR_URL;
+		//throw new com.ftn.sep.exception.BadRequestException("Neuspelo placanje!");
+		return URL_GRESKA;
 	}
 	
-	@GetMapping(value = "/payment/complete/{id}")
+	@GetMapping(value = "/placanje/uspesno/{id}")
     public RedirectView completePay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, @PathVariable Long id){
-		System.out.println("Usao u completePay metodu!");
         try {
-            Payment payment = paymentService.executePayment(paymentId, payerId);
+            Payment payment = paymentService.plati(paymentId, payerId);
             if (payment.getState().equals("approved")) {
                 HttpHeaders requestHeaders = new HttpHeaders();
                 requestHeaders.setContentType(MediaType.APPLICATION_JSON);
                 requestHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-                return new RedirectView(SUCCESS_URL);
+                return new RedirectView(URL_USPESNO);
             }
         } catch (PayPalRESTException e) {
-            System.out.print(e);
+        	e.printStackTrace();
         }
-        return new RedirectView(ERROR_URL);
+        return new RedirectView(URL_GRESKA);
 
     }
 	
-	@GetMapping(value = "/payment/cancel/{id}")
-    public RedirectView cancelPayment(@PathVariable Long id) {
-    	
+	@GetMapping(value = "/placanje/otkazano/{id}")
+    public RedirectView cancelPayment(@PathVariable Long id) {   	
     	paymentService.otkaziNalogZaPlacanje(id);
-    	
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(MediaType.APPLICATION_JSON);
         requestHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        return new RedirectView(CANCEL_URL);
+        return new RedirectView(URL_OTKAZANO);
     }
 
 	

@@ -11,6 +11,6 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
 	Boolean existsByEmail(String email);
 
 	@Query(value = "SELECT * FROM korisnik as u where u.email = :email", nativeQuery = true)
-	Korisnik findByEmailNotDeleted(String email);
+	Korisnik findByEmail(String email);
 
 }

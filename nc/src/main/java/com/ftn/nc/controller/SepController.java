@@ -1,5 +1,8 @@
 package com.ftn.nc.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.ftn.nc.dto.ZahtevZaPlacanjeDTO;
-import com.ftn.nc.payload.request.ZapocniPlacanjeRequest;
+import com.ftn.nc.payload.request.NovoPlacanjeRequest;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -22,14 +25,18 @@ public class SepController {
 	@Autowired
 	RestTemplate restTemplate;
     
-	@PostMapping("/zapocniPlacanje")
-	public ResponseEntity<String> beginPaymentProcess(@RequestBody ZapocniPlacanjeRequest request) {
+	@PostMapping("/rutirajNaPaypal")
+	public Map<String, String> rutirajNaPaypal(@RequestBody NovoPlacanjeRequest request) {
 		
-		ZahtevZaPlacanjeDTO payingRequest = new ZahtevZaPlacanjeDTO(1, request.getCena());
-		System.out.println("Cena iz requesta: " + request.getCena());
-		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8200/createPayment", payingRequest, String.class);
-		
-		return response;
+		ZahtevZaPlacanjeDTO dto = new ZahtevZaPlacanjeDTO();
+		dto.setCena(request.getCena());
+		dto.setIdProdavca(1);
+		ResponseEntity<String> response = restTemplate.postForEntity("https://localhost:8200/novoPlacanje", dto, String.class);
+		HashMap<String, String> map = new HashMap<>();
+        map.put("url", response.getBody());
+        System.out.println(map.values());
+        System.out.println(response.getBody());
+        return map;
 	}
 
 }

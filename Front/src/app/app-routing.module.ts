@@ -16,9 +16,9 @@ const routes: Routes = [
   {path: 'prijava', component: LoginComponent },
   {path: 'registracija', component: RegisterComponent },
   {path: 'izborCasopisa', component: IzborCasopisaComponent },
-  {path: 'payment/success', component: SuccessComponent },
-  {path: 'payment/error', component: ErrorComponent },
-  {path: 'payment/cancel', component: CancelComponent }
+  {path: 'placanje/uspesno', component: SuccessComponent },
+  {path: 'placanje/greska', component: ErrorComponent },
+  {path: 'placanje/otkazano', component: CancelComponent }
 
 ];
 

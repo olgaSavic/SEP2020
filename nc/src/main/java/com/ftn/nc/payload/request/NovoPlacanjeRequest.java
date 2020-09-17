@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ZapocniPlacanjeRequest {
+public class NovoPlacanjeRequest {
 	
 	@NotBlank
 	private double cena;

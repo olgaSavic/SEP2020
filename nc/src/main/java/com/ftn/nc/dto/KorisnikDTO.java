@@ -11,12 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class KorisnikDTO {
 	
-	private String ime ;
-	 
+	private String ime ; 
 	private String prezime ; 
-	
 	private String email ;
-
 	private String lozinka ;
 
 }
